@@ -1,0 +1,75 @@
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+        <div class="pull-left image">
+            <img src="/dist/img/user8-128x128.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+            <p sec:authentication="principal.username"></p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+    </div>
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="active treeview">
+            <a href="#">
+                <i class="fa fa-th"></i> <span>QUẢN LÝ KHO</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+<!--
+                <li class="active"><a href="/"><i class="fa fa-dashboard"></i> Dashboard v1</a></li>
+-->
+
+                <li ><a th:href="@{/product/list}"><i class="fa fa-circle-o"></i> Sản Phẩm</a></li>
+                <li><a th:href="@{/producttype/list}"><i class="fa fa-circle-o"></i> Danh mục Phân Loại</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><i class="fa fa-circle-o"></i> Logout</a></li>
+            </ul>
+        </li>
+        
+        
+    </ul>
+    
+    <ul class="sidebar-menu">
+        <li class="active treeview">
+            <a href="#">
+                <i class="fa fa-th"></i> <span>QUẢN LÝ THÔNG TIN</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+
+                <li ><a th:href="@{/user/list}"><i class="fa fa-circle-o"></i>Người dùng</a></li>
+                <li><a th:href="@{/user/list}"><i class="fa fa-circle-o"></i>Phân quyền</a></li>
+                <li><a th:href="@{/staff/list}"><i class="fa fa-circle-o"></i>Nhân Viên</a></li>
+                 <li><a th:href="@{/producttype/list}"><i class="fa fa-circle-o"></i>Tính Lương</a></li>
+            </ul>
+        </li>
+        
+        
+    </ul>
+    <ul class="sidebar-menu">
+        <li class="active treeview">
+            <a href="#">
+                <i class="fa fa-th"></i> <span>THỐNG KÊ</span>
+                <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+            </a>
+            <ul class="treeview-menu">
+
+                <li ><a th:href="@{/}"><i class="fa fa-circle-o"></i>Thống kê kho</a></li>
+                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><i class="fa fa-circle-o"></i>Đăng Xuất</a></li>
+                
+            </ul>
+        </li>
+        
+        
+    </ul>
+</section>
+<!-- /.sidebar -->

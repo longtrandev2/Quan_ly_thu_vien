@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<title>Dashboard</title>
+</head>
+<body>
+	<section layout:fragment="header">
+		<h1>Thông tin Nhân viên</h1>
+		<ol class="breadcrumb">
+			<li><a href="/"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+			<li class="active">Nhân viên</li>
+		</ol>
+	</section>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">Thông tin nhân viên</h3>
+					</div>
+					<div class="box-body">
+						<div class="box-footer center">
+							<a th:href="@{/staff/add}">
+								<button type="button" class="btn btn-primary pull-right">
+									<i class="fa fa-plus"></i> Thêm mới nhân viên
+								</button>
+							</a>
+						</div>
+						<div th:if="${param.success}">
+							<div class="alert alert-success alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-hidden="true">Ã—</button>
+								<h4>
+									<i class="icon fa fa-check"></i> Success!
+								</h4>
+								Information saved successfully.
+							</div>
+						</div>
+						<div th:if="${param.deleted}">
+							<div class="alert alert-info alert-dismissible">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-hidden="true">Ã—</button>
+								<h4>
+									<i class="icon fa fa-check"></i> Deleted!
+								</h4>
+								Information deleted successfully.
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<table id="example1"
+									class="table table-bordered table-striped dataTable"
+									role="grid" aria-describedby="example1_info">
+									<thead class="thead">
+										<tr>
+											<th>Photo</th>
+											<th>ID Staff</th>
+											<th>Name</th>
+											<th>Birthday</th>
+											<th>Phone</th>
+											<th>Salary</th>
+											<th>Depart</th>
+											<th>Gender</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="listUsers : ${list}">
+
+											<td><img th:src="@{'/getimage/'+${listUsers.photo}}"
+												style="width: 60px; height: 70px" class="user-image"
+												alt="User Image"></td>
+											<td th:text="${listUsers.id}"></td>
+											<td th:text="${listUsers.name}"></td>
+											<td th:text="${listUsers.birthday}"></td>
+											<td th:text="${listUsers.phone}"></td>
+											<td th:text="${listUsers.salary}"></td>
+											<td th:text="${listUsers.departs.name}"></td>
+                                            <td >
+                                                <span th:text="${listUsers.gender} ? 'Nam': 'Nu' "></span>
+                                            </td>
+											<td><a href="#"
+												class="btn btn-primary btn-xs purple editView" title="Edit"><i
+													class="fa fa-edit"></i> </a> <a href="#"
+												class="btn btn-danger btn-xs purple deleteView"
+												title="Delete"><i class="fa fa-trash-o"></i> </a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<th:block layout:fragment="script">
+		<script>
+			$(function() {
+				$('#example1').DataTable({
+					'paging' : true,
+					'lengthChange' : false,
+					'searching' : true,
+					'ordering' : true,
+					'info' : true,
+					'autoWidth' : false
+				})
+				jQuery('#example1_wrapper input').addClass(
+						"form-control input-sm");
+			})
+		</script>
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<title>Product Details</title>
+</head>
+<body>
+	<section layout:fragment="header">
+		<h1>Thêm Nhân Viên</h1>
+		<ol class="breadcrumb">
+			<li><a href="/"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+			<li class="active">Nhân viên</li>
+		</ol>
+	</section>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Horizontal Form -->
+				<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">Thông tin nhân viên</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+					
+					<form th:action="@{/staff/save}" th:object="${staffs}" method="post" class="form-horizontal">
+						
+						<div class="box-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Mã nhân viên <span
+									style="color: red">*</span></label>
+
+								<div class="col-sm-10">
+									<input type="text" class="form-control" readonly="readonly"
+										placeholder="Mã nhân viên">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Tên Nhân Viên <span
+									style="color: red">*</span></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="name"
+										id="name"  th:field="*{name}" />
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Giới tính</label>
+								<div class="col-sm-10">
+									<div class="radio">
+										<!--value = 1 => Nam| 0 =>Nu -->
+										<label class="checkbox-inline"> <input type="radio"
+											name="gender" value="1" id="gender1">Nam
+										</label> <label class="checkbox-inline"> <input type="radio"
+											name="gender" checked="checked" value="0" id="gender2">Nữ
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Ngày sinh</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="birthday"
+										id="birthday" value="">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Photo</label>
+								<div class="col-sm-10">
+									<input type="file" class="form-control" name="photo"
+										placeholder="Enter photo" id="photo">
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Số điện thoại</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="phone"
+										id="phone"/>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Hệ số lương</label>
+								<div class="col-sm-10">
+									<input type="number" class="form-control" name="salary"
+										id="salary" value="">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Chọn chức vụ</label>
+								<div class="col-sm-10">
+									<select  class="form-control" id="departId" name="departId">
+										<option >Select danh mục sản phẩm...</option>
+										<option ></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Ghi chú</label>
+								<div class="col-sm-10">
+									<textarea class="form-control" rows="3" id="notes" name="notes"></textarea>
+
+								</div>
+							</div>
+
+						</div>
+						<!-- /.box-body -->
+						<div class="box-footer center">
+							<a th:href="@{/staff/list}">
+								<button type="button" class="btn btn-default">
+									<i class="fa fa-right"></i> Quay lại
+								</button>
+							</a>
+							<button type="submit" class="btn btn-info pull-right">
+								<i class="fa fa-save"></i>Lưu Kho
+							</button>
+						</div>
+						<!-- /.box-footer -->
+					</form>
+				</div>
+				<!-- /.box -->
+			</div>
+		</div>
+	</div>
+
+	<th:block layout:fragment="script">
+		<script>
+			
+		</script>
+	</th:block>
+
+</body>
+
+</html>
