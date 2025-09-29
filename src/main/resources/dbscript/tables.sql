@@ -20,5 +20,3 @@ CREATE TABLE `product` (
   `is_deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`product_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
-
