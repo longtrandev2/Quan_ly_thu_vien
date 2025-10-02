@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * Created by noman.
@@ -22,6 +23,9 @@ public class CustomWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private AuthenticationSuccessHandler successHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -36,39 +40,43 @@ public class CustomWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         return auth;
     }
 
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
+
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
     }
 
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(
-                "/register**",
-                "/dist/**"
-                , "/plugins/**"
-                , "/bootstrap/**"
-                , "/extra/**"
-                , "/favicon.ico")
-                .permitAll()
-        .anyRequest().authenticated()
-                .and()
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .authorizeRequests()
+                .antMatchers("/", "/login**", "/register**").permitAll()
+                .antMatchers("/admin/**", "/product/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .anyRequest().authenticated()
+            .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll()
-                .and()
+                    .loginPage("/login")
+                    .successHandler(successHandler)
+                    .permitAll()
+            .and()
                 .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
-                .permitAll();
-
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login?logout")
+                    .permitAll()
+            .and()
+                .exceptionHandling()
+                    .accessDeniedPage("/403");
     }
-    public void configure(WebSecurity web) throws Exception {
-       // web.ignoring().antMatchers("/resources/static/**").anyRequest();
+    public void configure(WebSecurity web){
+       web.ignoring().antMatchers("/resources/static/**").anyRequest();
     }
 
 }

@@ -1,44 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorate="layout">
+<html
+    xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+    layout:decorate="layout" lang="vi">
 <head>
-    <title>Dashboard</title>
+    <title>Lỗi 404 - Không tìm thấy trang</title>
 </head>
 <body>
 <section layout:fragment="header">
     <h1>
-        Error 404 : Page Not Found
+        Lỗi 404: Không tìm thấy trang
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Error</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Lỗi</a></li>
         <li class="active">404</li>
     </ol>
 </section>
 
 <div layout:fragment="content">
     <div class="error-page">
-        <h2 class="headline text-yellow"> 404</h2>
+        <h2 class="headline text-yellow">404</h2>
 
         <div class="error-content">
-            <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+            <h3><i class="fa fa-warning text-yellow"></i> Rất tiếc! Không tìm thấy trang.</h3>
 
             <p>
-                We could not find the page you were looking for.
-                Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
+                Chúng tôi không thể tìm thấy trang bạn đang yêu cầu. Có thể trang đã bị xóa, hoặc bạn đã nhập sai địa chỉ.
             </p>
 
-            <form class="search-form">
-                <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search">
+            <p>
+                Thử các bước sau:
+            </p>
+            <ul>
+                <li>Kiểm tra lại URL để đảm bảo địa chỉ đúng.</li>
+                <li>Nếu bạn nghĩ đây là liên kết hỏng, hãy báo cho quản trị viên.</li>
+            </ul>
 
-                    <div class="input-group-btn">
-                        <button type="submit" name="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <!-- /.input-group -->
-            </form>
+            <div class="btn-group" role="group" style="margin-top:15px;">
+                <a class="btn btn-default" href="../../">Quay lại bảng điều khiển</a>
+                <a class="btn btn-warning" href="/report">Báo cáo</a>
+            </div>
         </div>
         <!-- /.error-content -->
     </div>
